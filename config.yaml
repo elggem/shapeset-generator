@@ -4,7 +4,7 @@ input_folder: './shapes'
 output_folder: 'output'
 
 # how many samples per shape
-sample_size: 5
+sample_size: 10
 
 # width and height of output
 width: 256
