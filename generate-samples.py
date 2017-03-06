@@ -26,13 +26,17 @@ for fn in os.listdir(CFG['input_folder']):
     for sample in xrange(CFG['sample_size']):
         img = cv2.imdecode(nparr, flags=cv2.CV_LOAD_IMAGE_GRAYSCALE)
         img = cv2.resize(img, (CFG['width'], CFG['height'])) 
+        img = cv2.copyMakeBorder(img,100,100,100,100,cv2.BORDER_CONSTANT,value=[0,0,0])
+        img = cv2.resize(img, (CFG['width'], CFG['height'])) 
         rows,cols = img.shape
         
         rotate_angle = CFG['angle']/2 - int(CFG['angle'] * rnd.random())
         scale_x = int((0.25 + (0.5 * rnd.random())) * rows)
         scale_y = int((0.25 + (0.5 * rnd.random())) * cols)
-        translate_x = int(scale_x * rnd.random())
-        translate_y = int(scale_y * rnd.random())
+        
+        translate_factor = CFG['translation'] * (rows+cols/2)
+        translate_x = scale_x / 2 + translate_factor/2 - int(translate_factor * rnd.random())
+        translate_y = scale_y / 2 + translate_factor/2 - int(translate_factor * rnd.random())
                 
         M_translate = np.float32([[1,0,translate_x],[0,1,translate_y]])
         M_rotate = cv2.getRotationMatrix2D((cols/2,rows/2),rotate_angle,1)
