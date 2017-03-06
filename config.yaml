@@ -13,6 +13,5 @@ height: 256
 shapes: [] # empty array == all shapes
 
 # other params
-noise: 99 # 0-255
+noise: 60 # 0-255
 angle: 40
-translation: 0.0

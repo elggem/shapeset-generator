@@ -34,7 +34,7 @@ for fn in os.listdir(CFG['input_folder']):
         scale_x = int((0.25 + (0.5 * rnd.random())) * rows)
         scale_y = int((0.25 + (0.5 * rnd.random())) * cols)
         
-        translate_factor = CFG['translation'] * (rows+cols/2)
+        translate_factor = 40
         translate_x = scale_x / 2 + translate_factor/2 - int(translate_factor * rnd.random())
         translate_y = scale_y / 2 + translate_factor/2 - int(translate_factor * rnd.random())
                 
