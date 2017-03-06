@@ -24,14 +24,13 @@ for fn in os.listdir(CFG['input_folder']):
     nparr = np.fromstring(byte_string, np.uint8)
     
     for sample in xrange(CFG['sample_size']):
-        img = cv2.imdecode(nparr, flags=cv2.CV_LOAD_IMAGE_GRAYSCALE) # TODO: UNCHANGED
+        img = cv2.imdecode(nparr, flags=cv2.CV_LOAD_IMAGE_GRAYSCALE)
+        img = cv2.resize(img, (CFG['width'], CFG['height'])) 
         rows,cols = img.shape
         
-
-        rotate_angle = 20 - int(40 * rnd.random())
+        rotate_angle = CFG['angle']/2 - int(CFG['angle'] * rnd.random())
         scale_x = int((0.25 + (0.5 * rnd.random())) * rows)
         scale_y = int((0.25 + (0.5 * rnd.random())) * cols)
-        
         translate_x = int(scale_x * rnd.random())
         translate_y = int(scale_y * rnd.random())
                 
@@ -39,11 +38,11 @@ for fn in os.listdir(CFG['input_folder']):
         M_rotate = cv2.getRotationMatrix2D((cols/2,rows/2),rotate_angle,1)
 
         img = cv2.resize(img,(scale_x, scale_y), interpolation = cv2.INTER_CUBIC)
-        img = cv2.warpAffine(img, M_translate, (cols,rows))
         img = cv2.warpAffine(img, M_rotate, (cols,rows))
+        img = cv2.warpAffine(img, M_translate, (cols,rows))
 
         noise = np.zeros(img.shape, np.uint8)
-        cv2.randn(noise,(0),(99))
+        cv2.randn(noise,(0),(CFG['noise']))
         
         img += noise
         

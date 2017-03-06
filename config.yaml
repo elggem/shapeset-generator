@@ -3,10 +3,15 @@
 input_folder: './shapes'
 output_folder: 'output'
 
-width: 48
-height: 48
+# how many samples per shape
+sample_size: 5
+
+# width and height of output
+width: 256
+height: 256
 
 shapes: [] # empty array == all shapes
 
 # other params
-sample_size: 100
+noise: 99 # 0-255
+angle: 40
