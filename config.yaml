@@ -1,0 +1,14 @@
+# Config file for ShapeSet generator
+
+input_folder: './shapes'
+output_folder: 'output'
+
+width: 48
+height: 48
+
+fg_color: "#000"
+bg_color: "#fff"
+
+shapes: [] # empty array == all shapes
+
+# other params
